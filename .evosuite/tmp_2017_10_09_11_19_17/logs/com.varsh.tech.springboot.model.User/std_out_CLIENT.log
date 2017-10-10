@@ -1,0 +1,1 @@
+[MASTER] 11:21:29.399 [pool-2-thread-1] WARN  TestSuiteSerialization - Cannot load tests because file does not exist: /home/vaseeharan/webworkspace/BootRestApp/.evosuite/evosuite-seeds/com.varsh.tech.springboot.model.User.seed

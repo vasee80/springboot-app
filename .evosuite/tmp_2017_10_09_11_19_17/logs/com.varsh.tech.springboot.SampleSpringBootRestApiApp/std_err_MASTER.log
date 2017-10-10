@@ -1,0 +1,5 @@
+[MASTER] 11:24:04.190 [main] ERROR ExternalProcessHandler - Class com.varsh.tech.springboot.SampleSpringBootRestApiApp. Clients have not finished yet, although a timeout occurred.
+ClientNode: SEARCH
+
+[MASTER] 11:24:04.291 [main] ERROR SearchStatistics - No statistics has been saved because EvoSuite failed to generate any test case
+[MASTER] 11:24:04.392 [main] ERROR TestGeneration - failed to write statistics data

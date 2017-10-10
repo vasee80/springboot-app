@@ -1,0 +1,17 @@
+[MASTER] 11:19:23.799 [pool-2-thread-1] WARN  TestSuiteSerialization - Cannot load tests because file does not exist: /home/vaseeharan/webworkspace/BootRestApp/.evosuite/evosuite-seeds/com.varsh.tech.springboot.service.UserServiceImpl.seed
+[MASTER] 11:21:18.267 [pool-2-thread-1] WARN  JUnitAnalyzer - Found unstable test named test0 -> class java.lang.AssertionError: expected:<15> but was:<5>
+[MASTER] 11:21:18.267 [pool-2-thread-1] WARN  JUnitAnalyzer - Failing test:
+ UserServiceImpl userServiceImpl0 = new UserServiceImpl();
+User user0 = new User(35L, "Sam", 0, 35L);
+userServiceImpl0.saveUser(user0);
+userServiceImpl0.updateUser(user0);
+assertEquals(15L, user0.getId());
+
+
+[MASTER] 11:21:19.108 [pool-2-thread-1] WARN  JUnitAnalyzer - Found unstable test named test0 -> class java.lang.AssertionError: expected null, but was:<User [id=1, name=Sam, age=30, salary=70000.0]>
+[MASTER] 11:21:19.108 [pool-2-thread-1] WARN  JUnitAnalyzer - Failing test:
+ UserServiceImpl userServiceImpl0 = new UserServiceImpl();
+User user0 = userServiceImpl0.findByName("Sam");
+assertNull(user0);
+
+
