@@ -21,8 +21,6 @@ node {
       archive 'target/*.jar'
    }
    stage('Deploy') {
-      steps {
-          echo 'Deployment...'
-      }
+      echo 'Deployment...'
    }
 }
