@@ -69,12 +69,23 @@ private static final AtomicLong counter = new AtomicLong();
 		users.clear();
 	}
 	
+	@Override
+	public User findByAge(int age) {
+		for(User user : users){
+			if(user.getAge()== age){
+				return user;
+			}
+		}
+		return null;
+	}
+
 	private static List<User> populateDummyUsers(){
 		List<User> users = new ArrayList<User>();
 		users.add(new User(counter.incrementAndGet(),"Sam",30, 70000));
 		users.add(new User(counter.incrementAndGet(),"Tom",40, 50000));
 		users.add(new User(counter.incrementAndGet(),"Jerome",45, 30000));
 		users.add(new User(counter.incrementAndGet(),"Silvia",50, 40000));
+		users.add(new User(counter.incrementAndGet(),"Ramana",35, 48000));
 		return users;
 	}
 
