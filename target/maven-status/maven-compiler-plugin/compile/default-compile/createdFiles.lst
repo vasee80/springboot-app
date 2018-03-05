@@ -1,3 +1,4 @@
+com/varsh/tech/springboot/SampleSpringBootRestApiApp.class
 com/varsh/tech/springboot/model/User.class
 com/varsh/tech/springboot/service/UserService.class
 com/varsh/tech/springboot/util/CustomErrorType.class
