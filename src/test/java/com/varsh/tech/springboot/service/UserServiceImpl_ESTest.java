@@ -146,7 +146,7 @@ public class UserServiceImpl_ESTest extends UserServiceImpl_ESTest_scaffolding {
       user0.setName(", age=");
       userServiceImpl0.deleteUserById(1L);
       userServiceImpl0.saveUser(user0);
-      assertEquals(5L, user0.getId());
+      assertEquals(6L, user0.getId());
       
       user0.setId((-808L));
       User user1 = userServiceImpl0.findByName(", age=");
