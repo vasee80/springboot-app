@@ -3,28 +3,28 @@ kind: Template
 metadata:
   annotations:
     iconClass: icon-java
-  name: bootrest
+  name: bootapp
 objects:
 - apiVersion: v1
   kind: ImageStream
   metadata:
-    name: bootrest
+    name: bootapp
     labels:
-      application: bootrest
+      application: bootapp
   spec:
     tags:
     - name: latest
 - apiVersion: v1
   kind: BuildConfig
   metadata:
-    name: bootrest
+    name: bootapp
     labels:
-      application: bootrest
+      application: bootapp
   spec:
     output:
       to:
         kind: ImageStreamTag
-        name: bootrest:latest
+        name: bootapp:latest
     source:
       git:
         ref: ${GIT_REF}
@@ -45,28 +45,28 @@ objects:
 - apiVersion: v1
   kind: DeploymentConfig
   metadata:
-    name: bootrest
+    name: bootapp
     labels:
-      application: bootrest
+      application: bootapp
   spec:
     replicas: 1
     selector:
-      deploymentconfig: bootrest
+      deploymentconfig: bootapp
     strategy:
       resources: {}
       type: Recreate
     template:
       metadata:
         labels:
-          application: bootrest
-          deploymentconfig: bootrest
-        name: bootrest
+          application: bootapp
+          deploymentconfig: bootapp
+        name: bootapp
       spec:
         containers:
         - env:
           - name: CATALOG_ENDPOINT
             value: "http://catalog:8080"
-          image: bootrest
+          image: bootapp
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 5
@@ -78,7 +78,7 @@ objects:
             periodSeconds: 5
             successThreshold: 1
             timeoutSeconds: 1
-          name: bootrest
+          name: bootapp
           ports:
           - containerPort: 8778
             name: jolokia
@@ -115,42 +115,42 @@ objects:
     - imageChangeParams:
         automatic: true
         containerNames:
-        - bootrest
+        - bootapp
         from:
           kind: ImageStreamTag
-          name: bootrest:latest
+          name: bootapp:latest
       type: ImageChange
     - type: ConfigChange
 - apiVersion: v1
   kind: Service
   metadata:
     labels:
-      app: bootrest
-      application: bootrest
-    name: bootrest
+      app: bootapp
+      application: bootapp
+    name: bootapp
   spec:
     ports:
     - port: 8080
       protocol: TCP
       targetPort: 8080
     selector:
-      deploymentconfig: bootrest
+      deploymentconfig: bootapp
 - apiVersion: v1
   kind: Route
   metadata:
     labels:
-      application: bootrest
-    name: bootrest
+      application: bootapp
+    name: bootapp
   spec:
     to:
       kind: Service
-      name: bootrest
+      name: bootapp
       weight: 100
 parameters:
 - displayName: Application name
   name: APPLICATION_NAME
   required: true
-  value: bootrest
+  value: bootapp
 - description: Git source URI for application
   displayName: Git source repository
   name: GIT_URI

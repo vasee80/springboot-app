@@ -6,8 +6,8 @@ items:
   kind: BuildConfig
   metadata:
     annotations:
-      pipeline.alpha.openshift.io/uses: '[{"name": "bootrest", "namespace": "", "kind": "DeploymentConfig"}]'
-    name: bootrest-service-pipeline
+      pipeline.alpha.openshift.io/uses: '[{"name": "bootapp", "namespace": "", "kind": "DeploymentConfig"}]'
+    name: bootapp-service-pipeline
   spec:
     source:
       git:

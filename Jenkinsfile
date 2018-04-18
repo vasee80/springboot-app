@@ -22,14 +22,14 @@ node {
    }
    stage('Build Image') {
     unstash name:"jar"
-    sh "oc start-build bootrest --from-file=target/bootrest.jar --follow"
+    sh "oc start-build bootapp --from-file=target/bootapp.jar --follow"
    }
    stage('Deploy') {
-    openshiftDeploy depCfg: 'bootrest'
-    openshiftVerifyDeployment depCfg: 'bootrest', replicaCount: 1, verifyReplicaCount: true
+    openshiftDeploy depCfg: 'bootapp'
+    openshiftVerifyDeployment depCfg: 'bootapp', replicaCount: 1, verifyReplicaCount: true
    }
    stage('System Test') {
-    sh "curl -s -X POST http://bootrest:8080/api/cart/dummy/666/1"
-    sh "curl -s http://bootrest:8080/api/cart/dummy | grep 'Dummy Product'"
+    sh "curl -s -X POST http://bootapp:8080/api/cart/dummy/666/1"
+    sh "curl -s http://bootapp:8080/api/cart/dummy | grep 'Dummy Product'"
    }
 }
