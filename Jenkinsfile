@@ -1,7 +1,7 @@
 node('maven') {
    stage('Build') {
      git url: "https://github.com/vasee80/springboot-app.git"
-     sh "mvn package"
+     sh "mvn clean package"
      stash name:"jar", includes:"target/bootapp.jar"
    }
 
