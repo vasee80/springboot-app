@@ -40,7 +40,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>BootRestApp</finalName>
+		<finalName>bootapp</finalName>
 		<plugins>
 			<plugin><!-- Include if you want to make an executable jar[FAT JAR which 
 					includes all dependencies along with sprinboot loader] that you can run on 
