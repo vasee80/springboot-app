@@ -1,7 +1,7 @@
-node {
+node('maven') {
    stage('Build') {
      git url: "https://github.com/vasee80/springboot-app.git"
-     sh "mvn evosuite:generate -Dmaven.test.failure.ignore clean package"
+     sh "mvn package"
      stash name:"jar", includes:"target/bootapp.jar"
    }
 
