@@ -1,20 +1,26 @@
 node {
-   stage('Preparation') { // for display purposes
-      // Get some code from a GitHub repository
-      git 'https://github.com/vasee80/springboot-app.git'
-   }
    stage('Build') {
-      // Run the maven build
-      if (isUnix()) {
-         sh "mvn evosuite:generate -Dmaven.test.failure.ignore clean package"
-      } else {
-         bat(/mvn evosuite:generate -Dmaven.test.failure.ignore clean package/)
-      }
+     git url: "https://github.com/vasee80/springboot-app.git"
+     sh "mvn evosuite:generate -Dmaven.test.failure.ignore clean package"
+     stash name:"jar", includes:"target/bootapp.jar"
    }
+
+   stage('Test') {
+    parallel(
+      "Cart Tests": {
+        sh "mvn verify -P boot-tests"
+      },
+      "Discount Tests": {
+        sh "mvn verify -P springboot-tests"
+      }
+    )
+   }
+
    stage('Results') {
       junit '**/target/surefire-reports/TEST-*.xml'
       archive 'target/*.jar'
    }
+   
    stage('Build Image') {
     unstash name:"jar"
     sh "oc start-build bootapp --from-file=target/bootapp.jar --follow"
