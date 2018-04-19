@@ -4,23 +4,10 @@ node('maven') {
      sh "mvn evosuite:generate -Dmaven.test.failure.ignore clean package"
      stash name:"jar", includes:"target/bootapp.jar"
    }
-
-   stage('Test') {
-    parallel(
-      "Cart Tests": {
-        sh "mvn verify -P boot-tests"
-      },
-      "Discount Tests": {
-        sh "mvn verify -P springboot-tests"
-      }
-    )
-   }
-
    stage('Results') {
       junit '**/target/surefire-reports/TEST-*.xml'
       archive 'target/*.jar'
    }
-   
    stage('Build Image') {
     unstash name:"jar"
     sh "oc start-build bootapp --from-file=target/bootapp.jar --follow"
